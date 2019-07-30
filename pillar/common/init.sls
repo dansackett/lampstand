@@ -1,0 +1,3 @@
+common_root_username: CHANGEME
+common_root_password: CHANGEME
+common_root_user_ssh_pub_key: CHANGEME

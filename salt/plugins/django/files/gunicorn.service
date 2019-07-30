@@ -1,0 +1,19 @@
+{% set common_root_username = salt.pillar.get('common_root_username') %}
+
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User={{ common_root_username }}
+Group=www-data
+WorkingDirectory=/var/www/django
+ExecStart=/var/www/.virtualenvs/django_venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          wsgi:application
+
+[Install]
+WantedBy=multi-user.target
